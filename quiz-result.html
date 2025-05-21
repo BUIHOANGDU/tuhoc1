@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kết quả trắc nghiệm</title>
+  <!-- Favicon cho các nền tảng và kích thước khác nhau -->
+<link rel="icon" type="image/png" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479">
+<link rel="shortcut icon" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/apple-touch-icon.png?v=1747654435265">
+<link rel="icon" type="image/png" sizes="128x128" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-128x128.png?v=1747654446725">
+<link rel="icon" type="image/png" sizes="64x64" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-64x64.png?v=1747654457793">
+<link rel="icon" type="image/png" sizes="48x48" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-48x48.png?v=1747654472675">
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-16x16.png?v=1747654486534">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 80px 20px 20px;
+    }
+
+    .btn-home-fixed {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #ff3366;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .btn-home-fixed:hover {
+      background: #ff4d6d;
+    }
+
+    h2 {
+      color: #ff3366;
+      margin-top: 0;
+    }
+
+    .summary,
+    .matches {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .match-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+
+    .match-card:hover {
+      box-shadow: 0 0 8px rgba(255, 51, 102, 0.2);
+    }
+
+    .match-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 8px;
+    }
+
+    .match-card h4 {
+      margin: 5px 0;
+      color: #ff3366;
+    }
+
+    .match-card p {
+      margin: 2px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="home.html" class="btn-home-fixed">⬅ Trang chủ</a>
+
+  <div class="summary">
+    <h2>Kết quả của bạn 💖</h2>
+    <p><strong>MBTI:</strong> <span id="mbti"></span></p>
+    <p><strong>Love Style:</strong> <span id="loveStyle"></span></p>
+    <p><strong>Lifestyle:</strong> <span id="lifestyle"></span></p>
+    <p><strong>Color & Food Style:</strong> <span id="colorFoodStyle"></span></p>
+  </div>
+
+  <div class="matches">
+    <h2>Gợi ý bạn phù hợp 👫</h2>
+    <div id="matchList">Đang tải danh sách...</div>
+  </div>
+
+  <script type="module" src="quiz-result.js"></script>
+</body>
+</html>

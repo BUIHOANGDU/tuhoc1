@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ - Hẹn Hò Việt Nhật</title>
+    <!-- Favicon cho các nền tảng và kích thước khác nhau -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/apple-touch-icon.png?v=1747654435265"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="128x128"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-128x128.png?v=1747654446725"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-64x64.png?v=1747654457793"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-48x48.png?v=1747654472675"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-16x16.png?v=1747654486534"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .left-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .left-section img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #ff3366;
+      }
+
+      h1 {
+        color: #ff3366;
+        margin: 0;
+      }
+
+      .logout-btn {
+        background: #ff3366;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .logout-btn:hover {
+        background: #ff4d6d;
+      }
+
+      #suggestions {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .user-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.2s;
+      }
+
+      .user-card:hover {
+        transform: scale(1.03);
+      }
+
+      .user-card img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #ff3366;
+        margin-bottom: 10px;
+      }
+
+      .user-card h3 {
+        color: #ff3366;
+        margin: 10px 0 5px;
+      }
+
+      .user-card p {
+        margin: 5px 0;
+        color: #555;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      #quizReminder {
+        margin: 20px 0;
+        background: #fff3cd;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ffeeba;
+        color: #856404;
+      }
+
+      #quizReminder button {
+        margin-top: 10px;
+        margin-right: 10px;
+        background-color: #ffc107;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .test-button {
+        margin-bottom: 20px;
+      }
+
+      .test-button a {
+        background: #6a1b9a;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+      }
+
+      .test-button a:hover {
+        background: #8e24aa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div style="text-align: right; margin: 10px 0">
+        <a
+          href="quiz-result.html"
+          style="
+            background: #2196f3;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          "
+          >🧪 Test QuizResult</a
+        >
+      </div>
+
+      <div class="left-section">
+        <img
+          id="userAvatar"
+          src="https://via.placeholder.com/100"
+          alt="Avatar cá nhân"
+        />
+        <h1>❤️Hẹn Hò Việt-Nhật❤️</h1>
+      </div>
+      <button class="logout-btn" onclick="logout()">Đăng xuất</button>
+    </div>
+
+    <div id="quizReminder" class="hidden">
+      <p>
+        Bạn chưa hoàn thành bài trắc nghiệm! 👀<br />Hãy hoàn thành để hệ thống
+        gợi ý người phù hợp nhé.
+      </p>
+      <button id="goToQuizBtn">Làm trắc nghiệm</button>
+      <button id="closeQuizBtn">Để sau</button>
+    </div>
+
+    <div
+      id="personalitySummary"
+      class="hidden"
+      style="
+        margin-bottom: 20px;
+        background: #e3f2fd;
+        padding: 15px;
+        border-radius: 8px;
+      "
+    >
+      <h2 style="color: #1976d2; margin-top: 0">🌟 Tính cách của bạn</h2>
+      <p style="color: #555; margin-bottom: 10px">
+        Dựa trên bài trắc nghiệm bạn đã hoàn thành
+      </p>
+      <p><strong>MBTI:</strong> <span id="mbtiResult"></span></p>
+      <p><strong>Phong cách yêu:</strong> <span id="loveStyleResult"></span></p>
+      <p>
+        <strong>Phong cách sống:</strong> <span id="lifestyleResult"></span>
+      </p>
+      <p>
+        <strong>Gu màu & ẩm thực:</strong> <span id="colorFoodResult"></span>
+      </p>
+
+      <!-- ✅ Nút làm lại bài trắc nghiệm -->
+      <div style="margin-top: 12px">
+        <a
+          href="love-quiz.html"
+          style="
+            background: #ff3366;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+          "
+          >📝 Làm lại bài trắc nghiệm</a
+        >
+      </div>
+    </div>
+
+    <h2 style="color: #ff3366">💘 Danh sách gợi ý kết bạn hôm nay</h2>
+    <div id="suggestions">
+      <p style="text-align: center; color: #888">
+        <em>⏳ Đang tìm những người phù hợp với bạn...</em>
+      </p>
+    </div>
+
+    <script type="module" src="home.js"></script>
+  </body>
+</html>

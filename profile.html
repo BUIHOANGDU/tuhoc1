@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cập nhật thông tin cá nhân</title>
+    <!-- Favicon cho các nền tảng và kích thước khác nhau -->
+<link rel="icon" type="image/png" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479">
+<link rel="shortcut icon" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/apple-touch-icon.png?v=1747654435265">
+<link rel="icon" type="image/png" sizes="128x128" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-128x128.png?v=1747654446725">
+<link rel="icon" type="image/png" sizes="64x64" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-64x64.png?v=1747654457793">
+<link rel="icon" type="image/png" sizes="48x48" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-48x48.png?v=1747654472675">
+<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479">
+<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-16x16.png?v=1747654486534">
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .box {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+        width: 360px;
+        text-align: center;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      .radio-group {
+        text-align: left;
+        margin-bottom: 10px;
+      }
+
+      .radio-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background: #ff3366;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background: #ff4d6d;
+        transform: scale(1.03);
+      }
+
+      .avatar-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ccc;
+        margin-bottom: 10px;
+      }
+
+      small {
+        color: #888;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Cập nhật thông tin cá nhân</h2>
+      <img id="preview" src="https://via.placeholder.com/120" class="avatar-preview" />
+      <input type="file" id="avatarFile" accept="image/*" />
+      <input type="text" id="avatarUrl" placeholder="Hoặc dán link ảnh trực tiếp" />
+      <small>Nếu bạn không chọn ảnh, hệ thống sẽ dùng avatar mặc định.</small>
+
+      <input type="text" id="name" placeholder="Họ và tên" />
+      <input type="number" id="age" placeholder="Tuổi" />
+      <textarea id="bio" placeholder="Sở thích (ngắn gọn)..."></textarea>
+
+      <label for="gender" style="display: block; margin-top: 10px; text-align: left; font-weight: bold;">Giới tính của bạn:</label>
+      <select id="gender">
+        <option value="" disabled selected hidden>🔻 Chọn giới tính của bạn</option>
+        <option value="male">Nam</option>
+        <option value="female">Nữ</option>
+        <option value="other">Khác</option>
+      </select>
+
+      <div class="radio-group">
+        <label><strong>Bạn muốn tìm:</strong></label>
+        <label><input type="radio" name="lookingFor" value="male" /> Nam</label>
+        <label><input type="radio" name="lookingFor" value="female" /> Nữ</label>
+        <label><input type="radio" name="lookingFor" value="other" /> Khác</label>
+      </div>
+
+      <button id="saveBtn">Lưu và tiếp tục</button>
+    </div>
+
+    <script type="module" src="profile.js"></script>
+  </body>
+</html>

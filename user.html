@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang cá nhân người dùng</title>
+    <!-- Favicon cho các nền tảng và kích thước khác nhau -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/apple-touch-icon.png?v=1747654435265"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="128x128"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-128x128.png?v=1747654446725"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-64x64.png?v=1747654457793"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-48x48.png?v=1747654472675"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-32x32.png?v=1747654478479"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://cdn.glitch.global/ec94bd1d-e727-4713-b926-b78cb8642a89/favicon-16x16.png?v=1747654486534"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .profile-box {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 400px;
+      }
+      .profile-box img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
+      }
+      h2 {
+        margin: 10px 0 5px;
+        color: #ff3366;
+      }
+      p {
+        margin: 5px 0;
+        color: #555;
+      }
+      .btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .btn-group button {
+        flex: 1;
+        margin: 0 5px;
+        padding: 10px;
+        background: #ff3366;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-group button:hover {
+        background: #ff4d6d;
+      }
+      .compatibility {
+        margin-top: 20px;
+        background: #fff0f5;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #444;
+        text-align: left;
+      }
+      .highlight {
+        color: green;
+        font-weight: bold;
+      }
+      .contrast {
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-box" id="userProfile">
+      <p>Đang tải thông tin...</p>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAK7OVFlCVjkxuKkXuQ6ZEdMFM4x7ohTBU",
+        authDomain: "henhovietnhat.firebaseapp.com",
+        projectId: "henhovietnhat",
+        storageBucket: "henhovietnhat.appspot.com",
+        messagingSenderId: "934244268292",
+        appId: "1:934244268292:web:d2f69f325473b3534ef851",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      const profileDiv = document.getElementById("userProfile");
+      const userId = new URLSearchParams(window.location.search).get("id");
+
+      const MBTI_REASON = {
+        INFP_ENFJ:
+          "INFP sống nội tâm, mơ mộng. ENFJ nhiệt huyết, định hướng. Họ hỗ trợ nhau trong cảm xúc và hành động.",
+        ENFJ_INFP:
+          "ENFJ chủ động cảm xúc, INFP thấu hiểu nhẹ nhàng. Họ chia sẻ lý tưởng sống cùng nhau.",
+        INFJ_ENFP:
+          "INFJ trầm lặng, sâu sắc. ENFP sôi nổi, sáng tạo. Cặp đôi giúp nhau mở rộng và hiểu chính mình.",
+        ENFP_INFJ:
+          "ENFP làm INFJ vui vẻ, INFJ giúp ENFP định hướng rõ ràng hơn.",
+        ISFP_ESFJ:
+          "ISFP dịu dàng, sống nghệ sĩ. ESFJ năng động, chăm sóc. Họ hòa hợp trong đời sống tình cảm.",
+        ESFJ_ISFP:
+          "ESFJ chủ động và gắn kết. ISFP cần không gian riêng. Họ cân bằng giữa chăm sóc và tự do.",
+        INTJ_ENFP:
+          "INTJ lý trí, tầm nhìn. ENFP giàu cảm xúc. ENFP giúp INTJ mềm mại, INTJ giúp ENFP định hướng.",
+        ENFP_INTJ:
+          "ENFP làm INTJ cảm nhận cuộc sống. INTJ giúp ENFP kiên định hơn.",
+        ISTJ_ESFP:
+          "ISTJ nghiêm túc, ESFP vui vẻ. Họ học hỏi sự ổn định và linh hoạt từ nhau.",
+        ESFP_ISTJ:
+          "ESFP mang niềm vui, ISTJ là điểm tựa. Họ tạo nên mối quan hệ vừa vui vẻ vừa vững chắc.",
+        INTP_ENTJ:
+          "INTP sáng tạo, ENTJ quyết đoán. ENTJ giúp INTP thực hiện hoá ý tưởng, INTP làm ENTJ suy ngẫm sâu hơn.",
+        ENTJ_INTP:
+          "ENTJ dẫn dắt, INTP linh hoạt. Họ phát triển qua tôn trọng trí tuệ nhau.",
+        ISFJ_ENFP:
+          "ISFJ chu đáo, ENFP đầy năng lượng. Họ bổ sung sự ổn định và hứng khởi cho nhau.",
+        ENFP_ISFJ:
+          "ENFP làm mới cuộc sống ISFJ, ISFJ tạo cảm giác an toàn cho ENFP.",
+        ISTP_ESTJ:
+          "ISTP thực tế, ESTJ tổ chức. ISTP giúp ESTJ linh hoạt, ESTJ định hướng cho ISTP.",
+        ESTJ_ISTP:
+          "ESTJ hành động, ISTP sáng tạo. Sự khác biệt tạo nên tính bổ sung tuyệt vời.",
+      };
+
+      function compare(val1, val2) {
+        if (!val1 || !val2) return "(Thiếu dữ liệu)";
+        return val1 === val2
+          ? `<span class="highlight">✅ Trùng khớp</span>`
+          : `<span class="contrast">🔄 Khác nhau</span>`;
+      }
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) return (window.location.href = "index.html");
+
+        const userRef = doc(db, "users", userId);
+        const quizRef = doc(db, "quizResults", userId);
+        const myQuizRef = doc(db, "quizResults", user.uid);
+
+        const [userSnap, quizSnap, myQuizSnap] = await Promise.all([
+          getDoc(userRef),
+          getDoc(quizRef),
+          getDoc(myQuizRef),
+        ]);
+
+        if (!userSnap.exists())
+          return (profileDiv.innerHTML = `<p>Không tìm thấy người dùng này.</p>`);
+
+        const info = userSnap.data();
+        const quiz = quizSnap.exists() ? quizSnap.data() : {};
+        const myQuiz = myQuizSnap.exists() ? myQuizSnap.data() : null;
+
+        const avatar = info.avatar || "https://via.placeholder.com/120";
+        const gender = info.gender || "Chưa rõ";
+        const interests = info.interestedIn?.join(", ") || "Không rõ";
+        const joinDate = info.joinedAt
+          ? new Date(info.joinedAt).toLocaleDateString("vi-VN")
+          : "---";
+
+        let explainBlock = "";
+        if (myQuiz && myQuiz.mbti && quiz.mbti) {
+          const key = `${myQuiz.mbti}_${quiz.mbti}`;
+          const reason = MBTI_REASON[key];
+          explainBlock += `<div class="compatibility"><strong>💖 Tương hợp MBTI:</strong><br>${
+            reason || "Không có lý giải chi tiết cho cặp này."
+          }</div>`;
+        }
+
+        if (myQuiz && quiz) {
+          explainBlock += `<div class="compatibility">
+            <strong>🔍 So sánh giữa hai bạn:</strong><br>
+            💘 Love Style: ${compare(myQuiz.loveStyle, quiz.loveStyle)}<br>
+            🏠 Lifestyle: ${compare(myQuiz.lifestyle, quiz.lifestyle)}<br>
+            🍱 Gu màu & ẩm thực: ${compare(
+              myQuiz.colorFoodStyle,
+              quiz.colorFoodStyle
+            )}
+          </div>`;
+        }
+
+        profileDiv.innerHTML = `
+          <img src="${avatar}" alt="Avatar" />
+          <h2>${info.name}</h2>
+          <p>Tuổi: ${info.age}</p>
+          <p>Giới tính: ${gender}</p>
+          <p>Sở thích: ${info.bio}</p>
+          <p>Quan tâm đến: ${interests}</p>
+          <p>Tham gia từ: ${joinDate}</p>
+          <p><strong>MBTI:</strong> ${quiz.mbti || "(Chưa có)"}</p>
+          <p><strong>Love Style:</strong> ${quiz.loveStyle || "(Chưa có)"}</p>
+          <p><strong>Lifestyle:</strong> ${quiz.lifestyle || "(Chưa có)"}</p>
+          <p><strong>Color & Food Style:</strong> ${
+            quiz.colorFoodStyle || "(Chưa có)"
+          }</p>
+          ${explainBlock}
+          <div class="btn-group">
+            <button onclick="window.location.href='home.html'">⬅ Trang chủ</button>
+            <button onclick="sendMessage()">Gửi tin nhắn</button>
+          </div>
+        `;
+      });
+
+      window.sendMessage = () => {
+        alert("Chức năng gửi tin nhắn chưa được triển khai.");
+      };
+    </script>
+  </body>
+</html>
